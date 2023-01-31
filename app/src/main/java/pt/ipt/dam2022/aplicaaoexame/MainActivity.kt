@@ -1,8 +1,11 @@
 package pt.ipt.dam2022.aplicaaoexame
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +16,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import java.io.IOException
+import java.util.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
@@ -37,6 +43,16 @@ class MainActivity : AppCompatActivity() {
     private fun getCurrentLocation(){
         if(checkPermissions()){
             if(isLocationEnabled()){
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return
+                }
                 fusedLocationProvider.lastLocation.addOnCompleteListener(this){
                     task-> val location: Location ?= task.result
                     if(location == null){
@@ -44,7 +60,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     else{
                         Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
-                        country.text = ""
+                        country.text = getCountryName(location.latitude, location.longitude, this)
+                        city.text = getCityName(location.latitude, location.longitude, this)
                     }
                 }
             }
@@ -107,5 +124,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCityNCountry
+    private fun getCityName(latitude: Double, longitude: Double, context: Context): String? {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses = try {
+            geocoder.getFromLocation(latitude, longitude, 1)
+        } catch (ioException: IOException) {
+            // Catch network or other I/O problems.
+            ioException.printStackTrace()
+            null
+        } catch (illegalArgumentException: IllegalArgumentException) {
+            // Catch invalid latitude or longitude values.
+            illegalArgumentException.printStackTrace()
+            null
+        }
+        return addresses?.firstOrNull()?.locality
+    }
+
+    private fun getCountryName(latitude: Double, longitude: Double, context: Context): String? {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        val addresses = try {
+            geocoder.getFromLocation(latitude, longitude, 1)
+        } catch (ioException: IOException) {
+            // Catch network or other I/O problems.
+            ioException.printStackTrace()
+            null
+        } catch (illegalArgumentException: IllegalArgumentException) {
+            // Catch invalid latitude or longitude values.
+            illegalArgumentException.printStackTrace()
+            null
+        }
+        return addresses?.firstOrNull()?.countryName
+    }
 }
