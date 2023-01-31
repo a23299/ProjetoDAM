@@ -23,9 +23,11 @@ class SignUpActivity : AppCompatActivity() {
             val confirmPassword = binding.signupConfirm.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty())
-                if (password == confirmPassword) {
+                if (password == confirmPassword)
+                    if (password.length <= 7) {
 
-                        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val intent = Intent(this, LoginActivity::class.java)
                                     startActivity(intent)
@@ -38,6 +40,11 @@ class SignUpActivity : AppCompatActivity() {
                                         .show()
                                 }
                             }
+
+
+                    } else {
+                        Toast.makeText(this, "Mais de 7", Toast.LENGTH_SHORT).show()
+
                     }
                 else {
                     Toast.makeText(this, "A password não é igual", Toast.LENGTH_SHORT).show()
