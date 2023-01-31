@@ -25,8 +25,7 @@ class SignUpActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty())
                 if (password == confirmPassword) {
 
-                        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener {
+                        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val intent = Intent(this, LoginActivity::class.java)
                                     startActivity(intent)
@@ -39,15 +38,12 @@ class SignUpActivity : AppCompatActivity() {
                                         .show()
                                 }
                             }
-
-
-
                     }
                 else {
-                    Toast.makeText(this, "A password não é igual", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "A password não é igual", Toast.LENGTH_SHORT).show()
                 }
             else {
-                Toast.makeText(this, "Não preencheu ", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "Não preencheu ", Toast.LENGTH_SHORT).show()
             }
 
 

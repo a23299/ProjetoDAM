@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">AplicaçaoExame</string>
+    <string name="app_name">App Exam</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confimar_password">Confimar Password</string>
+    <string name="sign_up_bt">Sign Up</string>
+    <string name="j_tem_conta_login">Já tem conta? Login</string>
+    <string name="current_location">Current Location</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="currentLocation">Current Location</string>
 </resources>
