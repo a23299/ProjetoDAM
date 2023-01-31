@@ -1,52 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="40dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            >
 
         <TextView
             android:id="@+id/currentLocation_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/current_location"
+            android:text="@string/Localizaco_Atual"
             android:textColor="@color/black"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp"
-            tools:ignore="MissingConstraints" />
+            android:textSize="36dp"/>
 
         <Button
             android:id="@+id/currentLocation_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/currentLocation"
-            tools:layout_editor_absoluteX="22dp"
-            tools:layout_editor_absoluteY="634dp" />
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/Localizaco_Atual"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/lavander"
+            app:cornerRadius = "20dp"
+            />
 
         <TextView
             android:id="@+id/country_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/country"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="51dp"
-            tools:ignore="MissingConstraints" />
+            android:textSize="36dp"
+            android:textAlignment="center"
+            android:textColor="@color/lavander" />
 
         <TextView
             android:id="@+id/city_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/city"
-            tools:layout_editor_absoluteX="17dp"
-            tools:layout_editor_absoluteY="84dp"
-            tools:ignore="MissingConstraints" />
+            android:textSize="36dp"
+            android:textAlignment="center"
+            android:textColor="@color/lavander"/>
 
-    </LinearLayout>
-</RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
