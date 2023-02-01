@@ -3,7 +3,6 @@
 package pt.ipt.dam2022.aplicaaoexame
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,7 +20,6 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import java.io.IOException
 import java.util.*
-import pt.ipt.dam2022.aplicaaoexame.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var lon: TextView
     private lateinit var currentLocationBT: Button
     private lateinit var meteriologiaBT: Button
+
     private val permissionRequestAccessLocation = 100
 
 
@@ -53,8 +52,6 @@ class MainActivity : AppCompatActivity() {
             getCurrentLocation()
         }
         meteriologiaBT.setOnClickListener{
-            getCurrentLocation()
-
             val tempoIntent = Intent(this, WeatherActivity::class.java)
             startActivity(tempoIntent)
         }

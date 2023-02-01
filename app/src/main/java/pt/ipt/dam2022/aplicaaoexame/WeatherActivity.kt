@@ -18,21 +18,28 @@ import java.util.*
 class WeatherActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWeatherBinding
-    val lat: String = "39.4647"
-    val lon: String = "-8.469"
+    var lat: String = "39.4647"
+    var lon: String = "-8.469"
     val api: String = "f4e820447d3f6dc3e5581f68d547ef74"
+    private var main = MainActivity()
     private lateinit var voltarBT: Button
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
+        getCoordinates()
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+    }
+
+
+    private fun getCoordinates(){
+        lat = main.getCurrentLatitude(applicationContext).toString()
+        lon = main.getCurrentLongitude(applicationContext).toString()
     }
 
     @SuppressLint("StaticFieldLeak")
