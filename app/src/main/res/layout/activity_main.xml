@@ -61,6 +61,17 @@
         android:backgroundTint="@color/azul"
         app:cornerRadius = "20dp" />
 
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Carregar ultima localização"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/azul"
+            app:cornerRadius = "20dp"
+            />
+
 
 
 
@@ -71,7 +82,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="10dp"
         app:cardElevation="20dp"
         app:cardCornerRadius="20dp">
 
@@ -94,6 +105,27 @@
             android:hint="Cidade"
             android:id="@+id/cidade"
             android:layout_marginTop="40dp">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:hint="Longitude"
+            android:id="@+id/longi"
+            android:layout_marginTop="120dp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:hint="Latitude"
+            android:id="@+id/lat"
+            android:layout_marginTop="80dp">
 
         </TextView>
 
