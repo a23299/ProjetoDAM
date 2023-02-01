@@ -1,9 +1,12 @@
+@file:Suppress("DEPRECATION")
+
 package pt.ipt.dam2022.aplicaaoexame
 
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -14,9 +17,9 @@ import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
 
-        val LAT : String = "39.4647"
-        val LON : String = "-8.469"
-        val API : String = "f4e820447d3f6dc3e5581f68d547ef74"
+    val LAT : String = "39.4647"
+    val LON : String = "-8.469"
+    val API : String = "f4e820447d3f6dc3e5581f68d547ef74"
 
 
 
@@ -69,17 +72,20 @@ class WeatherActivity : AppCompatActivity() {
                 val psol:Long = sys.getLong("sunset")
                 val vvento = wind.getString("speed")
                 val descricaotempo = weather.getString("description")
+                val groupTempo = weather.getString("main")
 
                 val local = jsonObj.getString("name")+", "+sys.getString("country")
 
 
                 findViewById<TextView>(R.id.Localizacao).text = local
                 findViewById<TextView>(R.id.update1).text =  updatet
-                findViewById<TextView>(R.id.Tempo).text = descricaotempo.capitalize()
+                findViewById<TextView>(R.id.Tempo).text = descricaotempo.capitalize(Locale.ROOT)
                 findViewById<TextView>(R.id.Temperatura).text = temp
                 findViewById<TextView>(R.id.temp_min).text = tempMin
                 findViewById<TextView>(R.id.temp_max).text = tempMax
 
+                var icon = findViewById<ImageView>(R.id.weather_icon)
+                setWeatherConditionIcon(icon,groupTempo)
 
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.Container1).visibility = View.VISIBLE
@@ -92,5 +98,18 @@ class WeatherActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun setWeatherConditionIcon(imageView: ImageView, weatherCondition: String) {
+        when (weatherCondition) {
+            "Clear" -> imageView.setImageResource(R.drawable.clear)
+            "Rain" -> imageView.setImageResource(R.drawable.rain)
+            "Snow" -> imageView.setImageResource(R.drawable.snow)
+            "Thunderstorm" -> imageView.setImageResource(R.drawable.thunder)
+            "Drizzle" -> imageView.setImageResource(R.drawable.rain)
+            "Atmosphere" -> imageView.setImageResource(R.drawable.atmosphere)
+            "Clouds" -> imageView.setImageResource(R.drawable.cloud)
+            else -> imageView.setImageResource(R.drawable.unknown)
+        }
     }
 }
