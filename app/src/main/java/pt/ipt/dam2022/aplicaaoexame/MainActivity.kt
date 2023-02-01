@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var country: TextView
     private lateinit var city: TextView
     private lateinit var currentLocationBT: Button
+    private lateinit var locationManager: LocationManager
     private val permissionRequestAccessLocation = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCityName(latitude: Double, longitude: Double, context: Context): String? {
+    fun getCityName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
             geocoder.getFromLocation(latitude, longitude, 1)
@@ -124,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         return addresses?.firstOrNull()?.locality
     }
 
-    private fun getCountryName(latitude: Double, longitude: Double, context: Context): String? {
+    fun getCountryName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
             geocoder.getFromLocation(latitude, longitude, 1)
@@ -151,9 +152,7 @@ class MainActivity : AppCompatActivity() {
             &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
         ) {
-            fusedLocationProvider.requestLocationUpdates(
-                locationRequest, locationCallback, Looper.myLooper()
-            )
+            fusedLocationProvider.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
     }
 
@@ -164,5 +163,31 @@ class MainActivity : AppCompatActivity() {
             country.text = getCountryName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             city.text = getCityName(lastLocation.latitude, lastLocation.longitude, applicationContext)
         }
+    }
+
+    fun getCurrentLatitude(context: Context): String? {
+        val location = getLocation(context)
+        return location?.latitude?.toString()
+    }
+
+    fun getCurrentLongitude(context: Context): String? {
+        val location = getLocation(context)
+        return location?.longitude?.toString()
+    }
+
+    private fun getLocation(context: Context): Location? {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            &&
+            ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        )
+        {
+            requestPermission()
+        } else {
+            return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        }
+
+        return null
     }
 }
