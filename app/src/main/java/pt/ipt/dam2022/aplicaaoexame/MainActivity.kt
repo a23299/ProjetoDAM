@@ -26,7 +26,6 @@ import pt.ipt.dam2022.aplicaaoexame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     private lateinit var country: TextView
     private lateinit var city: TextView
