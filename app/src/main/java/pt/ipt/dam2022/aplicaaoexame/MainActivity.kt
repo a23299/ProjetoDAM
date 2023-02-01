@@ -171,8 +171,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "your last last location: " + lastLocation.longitude.toString() + " , " + lastLocation.latitude.toString(), Toast.LENGTH_SHORT).show()
             country.text = getCountryName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             city.text = getCityName(lastLocation.latitude, lastLocation.longitude, applicationContext)
-            lat.text = getCurrentLatitude(applicationContext)
-            lon.text = getCurrentLongitude(applicationContext)
+            lat.text = lastLocation.latitude.toString()
+            lon.text = lastLocation.longitude.toString()
         }
     }
 
