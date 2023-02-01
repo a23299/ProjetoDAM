@@ -34,6 +34,11 @@ class WeatherActivity : AppCompatActivity() {
         binding = ActivityWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.voltarBT.setOnClickListener {
+            val voltarIntent = Intent(this, MainActivity::class.java)
+            startActivity(voltarIntent)
+        }
+
     }
 
 
@@ -124,11 +129,6 @@ class WeatherActivity : AppCompatActivity() {
             else -> imageView.setImageResource(R.drawable.unknown)
         }
 
-    binding.voltarBT.setOnClickListener {
-        val voltarIntent = Intent(this, MainActivity::class.java)
-        startActivity(voltarIntent)
     }
 
-
-    }
 }
