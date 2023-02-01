@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             binding.signupRedirect.setOnClickListener {
-                val signupIntent = Intent(this, SignUpActivity::class.java)
+                val signupIntent = Intent(this, WeatherActivity::class.java)
                 startActivity(signupIntent)
             }
         }

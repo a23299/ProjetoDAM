@@ -14,7 +14,8 @@ import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
 
-        val CITY : String = "dhaka,db"
+        val LAT : String = "39.4647"
+        val LON : String = "-8.469"
         val API : String = "f4e820447d3f6dc3e5581f68d547ef74"
 
 
@@ -39,7 +40,7 @@ class WeatherActivity : AppCompatActivity() {
         override fun doInBackground(vararg p0: String?): String? {
             var response:String?
             try {
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(Charsets.UTF_8)
+                response = URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&lat=$LAT&lon=$LON&appid=$API").readText(Charsets.UTF_8)
             }
             catch (e: Exception)
             {
@@ -52,23 +53,33 @@ class WeatherActivity : AppCompatActivity() {
             super.onPostExecute(result)
             try{
                 val jsonObj = JSONObject(result)
-                val sys = jsonObj.getJSONObject("sys")
                 val main = jsonObj.getJSONObject("main")
-                val tempo = jsonObj.getJSONArray("tempo").getJSONObject(0)
-                val Uupdate:Long = jsonObj.getLong("data")
-                val Uupdatet = "Atualizado pela ultima vez em:" + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(Uupdate*1000))
-                val temp = main.getString("Temp")+"ºC"
-                val tempMin = "Min: "+ main.getString("temp_min")+"ºC"
-                val tempMax = "Min: "+ main.getString("temp_max")+"ºC"
-                val tempoDescicao = tempo.getString("descricao")
-                val localizacao = jsonObj.getString("nome") + ", " + sys.getString("Pais")
+                val sys = jsonObj.getJSONObject("sys")
+                val wind = jsonObj.getJSONObject("wind")
+                val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
 
-                findViewById<TextView>(R.id.Localizacao).text = localizacao
-                findViewById<TextView>(R.id.update1).text = Uupdatet
-                findViewById<TextView>(R.id.Tempo).text = tempoDescicao.capitalize()
+                val update:Long = jsonObj.getLong("dt")
+                val updatet = "Updated at: "+ SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(update*1000))
+                val temp = main.getString("temp")+"°C"
+                val tempMin = "Min Temp: " + main.getString("temp_min")+"°C"
+                val tempMax = "Max Temp: " + main.getString("temp_max")+"°C"
+                val pressao = main.getString("pressure")
+                val humidade= main.getString("humidity")
+                val nsol:Long = sys.getLong("sunrise")
+                val psol:Long = sys.getLong("sunset")
+                val vvento = wind.getString("speed")
+                val descricaotempo = weather.getString("description")
+
+                val local = jsonObj.getString("name")+", "+sys.getString("country")
+
+
+                findViewById<TextView>(R.id.Localizacao).text = local
+                findViewById<TextView>(R.id.update1).text =  updatet
+                findViewById<TextView>(R.id.Tempo).text = descricaotempo.capitalize()
+                findViewById<TextView>(R.id.Temperatura).text = temp
                 findViewById<TextView>(R.id.temp_min).text = tempMin
                 findViewById<TextView>(R.id.temp_max).text = tempMax
-                findViewById<TextView>(R.id.Temperatura).text = temp
+
 
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.Container1).visibility = View.VISIBLE
