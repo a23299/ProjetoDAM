@@ -3,6 +3,7 @@
 package pt.ipt.dam2022.aplicaaoexame
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,9 +21,12 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import java.io.IOException
 import java.util.*
+import pt.ipt.dam2022.aplicaaoexame.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     private lateinit var country: TextView
     private lateinit var city: TextView
@@ -30,15 +34,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private val permissionRequestAccessLocation = 100
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_get_location)
+        setContentView(R.layout.activity_main)
 
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
 
-        country = findViewById(R.id.country_txt)
-        city = findViewById(R.id.city_txt)
-        currentLocationBT = findViewById(R.id.currentLocation_bt)
+        country = findViewById(R.id.pais)
+        city = findViewById(R.id.cidade)
+        currentLocationBT = findViewById(R.id.button)
 
         currentLocationBT.setOnClickListener{
             getCurrentLocation()

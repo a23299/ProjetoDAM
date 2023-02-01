@@ -4,61 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".WeatherActivity"
-    android:padding="25dp"
     android:background="@drawable/background"
-    >
-    
-    
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:context=".WeatherActivity">
+
+
     <RelativeLayout
         android:id="@+id/Container1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
+
         <LinearLayout
             android:id="@+id/Container2"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/Localizacao"
-                android:textSize="24sp"
-                android:text="Localização"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white">
-            </TextView>
+                android:text="Localização"
+                android:textColor="@color/white"
+                android:textSize="24sp"></TextView>
+
             <TextView
                 android:id="@+id/update1"
-                android:textSize="14sp"
-                android:text="Uupdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white">
+                android:text="Uupdate"
+                android:textColor="@color/white"
+                android:textSize="14sp">
 
 
             </TextView>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/Container3"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/Tempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Tempo"
-                android:text="chuva"
-                android:textSize="18sp"
                 android:layout_gravity="center"
-                android:textColor="@color/white">
-            </TextView>
+                android:text="chuva"
+                android:textColor="@color/white"
+                android:textSize="18sp"></TextView>
 
             <ImageView
                 android:id="@+id/weather_icon"
@@ -76,61 +76,79 @@
 
             <TextView
                 android:id="@+id/Temperatura"
-                android:textSize="90sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="sans-serif-thin"
                 android:text="24º"
                 android:textColor="@color/white"
-                android:fontFamily="sans-serif-thin">
-            </TextView>
+                android:textSize="90sp"></TextView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center"
-                >
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="wrap_content"
                     android:id="@+id/temp_min"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="min">
 
                 </TextView>
+
                 <Space
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                 </Space>
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="max"
                     android:id="@+id/temp_max"
-                    android:layout_height="wrap_content">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="max">
 
                 </TextView>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/voltar_BT"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/azul2"
+                    android:text="Voltar"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
+
     </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/progresso"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </ProgressBar>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/erro"
         android:layout_centerInParent="true"
-        android:text="Erro">
+        android:visibility="gone">
+
+    </ProgressBar>
+
+    <TextView
+        android:id="@+id/erro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Erro"
+        android:visibility="gone">
 
     </TextView>
 

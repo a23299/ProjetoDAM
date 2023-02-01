@@ -35,7 +35,7 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Get Location"
+        android:text="Localização atual"
         android:textSize="18sp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/azul"
@@ -45,14 +45,57 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Search Location"
+        android:text="Procurar Localização"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/azul"
+        app:cornerRadius = "20dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Ver Temperatura"
         android:textSize="18sp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/azul"
         app:cornerRadius = "20dp" />
 
 
+
+
+
         </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:hint="País"
+            android:id="@+id/pais">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            android:hint="Cidade"
+            android:id="@+id/cidade"
+            android:layout_marginTop="40dp">
+
+        </TextView>
 
     </androidx.cardview.widget.CardView>
 
