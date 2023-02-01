@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var country: TextView
     private lateinit var city: TextView
     private lateinit var currentLocationBT: Button
-    private lateinit var locationManager: LocationManager
     private val permissionRequestAccessLocation = 100
 
 
@@ -65,8 +64,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     else{
                         Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
-                        country.text = getCountryName(location.latitude, location.longitude, this)
-                        city.text = getCityName(location.latitude, location.longitude, this)
+                        country.text = getCountryName(location.latitude, location.longitude, applicationContext)
+                        city.text = getCityName(location.latitude, location.longitude, applicationContext)
                     }
                 }
             }
