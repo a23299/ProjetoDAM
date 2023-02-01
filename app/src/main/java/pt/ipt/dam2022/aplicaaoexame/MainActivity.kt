@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var lat: TextView
     private lateinit var lon: TextView
     private lateinit var currentLocationBT: Button
+    private lateinit var meteriologiaBT: Button
     private val permissionRequestAccessLocation = 100
 
 
@@ -46,9 +47,16 @@ class MainActivity : AppCompatActivity() {
         lat = findViewById(R.id.lat)
         lon = findViewById(R.id.longi)
         currentLocationBT = findViewById(R.id.button)
+        meteriologiaBT = findViewById(R.id.button3)
 
         currentLocationBT.setOnClickListener{
             getCurrentLocation()
+        }
+        meteriologiaBT.setOnClickListener{
+            getCurrentLocation()
+
+            val tempoIntent = Intent(this, WeatherActivity::class.java)
+            startActivity(tempoIntent)
         }
 
     }
