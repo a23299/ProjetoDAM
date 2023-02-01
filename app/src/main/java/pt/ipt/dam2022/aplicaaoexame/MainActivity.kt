@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
     private lateinit var country: TextView
     private lateinit var city: TextView
+    private lateinit var lat: TextView
+    private lateinit var lon: TextView
     private lateinit var currentLocationBT: Button
     private val permissionRequestAccessLocation = 100
 
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         country = findViewById(R.id.pais)
         city = findViewById(R.id.cidade)
+        lat = findViewById(R.id.lat)
+        lon = findViewById(R.id.longi)
         currentLocationBT = findViewById(R.id.button)
 
         currentLocationBT.setOnClickListener{
@@ -65,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
                         country.text = getCountryName(location.latitude, location.longitude, applicationContext)
                         city.text = getCityName(location.latitude, location.longitude, applicationContext)
+                        lat.text = getCurrentLatitude(applicationContext)
+                        lon.text = getCurrentLongitude(applicationContext)
                     }
                 }
             }
@@ -165,6 +171,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "your last last location: " + lastLocation.longitude.toString() + " , " + lastLocation.latitude.toString(), Toast.LENGTH_SHORT).show()
             country.text = getCountryName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             city.text = getCityName(lastLocation.latitude, lastLocation.longitude, applicationContext)
+            lat.text = getCurrentLatitude(applicationContext)
+            lon.text = getCurrentLongitude(applicationContext)
         }
     }
 
