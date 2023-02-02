@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentLocationBT: Button
     private lateinit var meteriologiaBT: Button
     private lateinit var loadLocalBT: Button
-
     private lateinit var countryString: String
     private lateinit var cityString: String
     private lateinit var latString: String

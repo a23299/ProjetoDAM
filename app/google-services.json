@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "621213262642-fdemvbb6oq95jcjhgf687en0bk4569e1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pt.ipt.dam2022.aplicaaoexame",
+            "certificate_hash": "5bf23dcf527fbf20f7cd0962d38bb078038c5f88"
+          }
+        },
+        {
           "client_id": "621213262642-2sconec67s7j4826bp848pn78do7k0bl.apps.googleusercontent.com",
           "client_type": 3
         }
