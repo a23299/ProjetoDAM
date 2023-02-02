@@ -28,7 +28,7 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        getCoordinates()
+        getCoordinates(main.loadLatitude(), main.loadLongitude())
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -45,6 +45,11 @@ class WeatherActivity : AppCompatActivity() {
     private fun getCoordinates(){
         lat = main.getCurrentLatitude(applicationContext).toString()
         lon = main.getCurrentLongitude(applicationContext).toString()
+    }
+
+    private fun getCoordinates(latitude: String, longitude: String){
+        lat = latitude
+        lon = longitude
     }
 
     @SuppressLint("StaticFieldLeak")

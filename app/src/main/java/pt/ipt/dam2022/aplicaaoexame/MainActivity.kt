@@ -3,6 +3,7 @@
 package pt.ipt.dam2022.aplicaaoexame
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -31,6 +32,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var lon: TextView
     private lateinit var currentLocationBT: Button
     private lateinit var meteriologiaBT: Button
+    private lateinit var loadLocalBT: Button
+
+    private lateinit var countryString: String
+    private lateinit var cityString: String
+    private lateinit var latString: String
+    private lateinit var longString: String
 
     private val permissionRequestAccessLocation = 100
 
@@ -47,13 +54,23 @@ class MainActivity : AppCompatActivity() {
         lon = findViewById(R.id.longi)
         currentLocationBT = findViewById(R.id.button)
         meteriologiaBT = findViewById(R.id.button3)
+        loadLocalBT = findViewById(R.id.button4)
 
         currentLocationBT.setOnClickListener{
             getCurrentLocation()
         }
+
         meteriologiaBT.setOnClickListener{
-            val tempoIntent = Intent(this, WeatherActivity::class.java)
-            startActivity(tempoIntent)
+            if(lat.text.isNotEmpty() && lat.text.isNotEmpty() ) {
+                val tempoIntent = Intent(this, WeatherActivity::class.java)
+                startActivity(tempoIntent)
+            } else{
+                Toast.makeText(this, "Tem de selecionar uma localização", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        loadLocalBT.setOnClickListener{
+            loadLocation()
         }
 
     }
@@ -76,11 +93,13 @@ class MainActivity : AppCompatActivity() {
                         city.text = getCityName(location.latitude, location.longitude, applicationContext)
                         lat.text = getCurrentLatitude(applicationContext)
                         lon.text = getCurrentLongitude(applicationContext)
+                        coordinatesString()
+                        saveData()
                     }
                 }
             }
-            else{requestPermission()
-
+            else{
+                requestPermission()
             }
         }
         else {
@@ -178,6 +197,8 @@ class MainActivity : AppCompatActivity() {
             city.text = getCityName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             lat.text = lastLocation.latitude.toString()
             lon.text = lastLocation.longitude.toString()
+            coordinatesString()
+            saveData()
         }
     }
 
@@ -206,4 +227,59 @@ class MainActivity : AppCompatActivity() {
 
         return null
     }
+
+    private fun coordinatesString(){
+        countryString = country.text.toString()
+        cityString = city.text.toString()
+        latString = lat.text.toString()
+        longString = lon.text.toString()
+    }
+    @SuppressLint("CommitPrefEdits")
+    private fun saveData(){
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply{
+            putString("country", countryString)
+            putString("city", cityString)
+            putString("latitude", latString)
+            putString("longitude", longString)
+        }.apply()
+        Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun loadCountry(): String {
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("country", null)
+
+        return savedString.toString()
+    }
+
+    private fun loadCity(): String {
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("city", null)
+
+        return savedString.toString()
+    }
+
+    fun loadLatitude(): String {
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("latitude", null)
+
+        return savedString.toString()
+    }
+
+    fun loadLongitude(): String {
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("longitude", null)
+
+        return savedString.toString()
+    }
+
+    private fun loadLocation(){
+        country.text = loadCountry()
+        city.text = loadCity()
+        lat.text = loadLatitude()
+        lon.text = loadLongitude()
+    }
+
 }
