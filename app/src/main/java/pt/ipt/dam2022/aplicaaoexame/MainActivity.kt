@@ -22,24 +22,26 @@ import com.google.android.gms.location.*
 import java.io.IOException
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
+
     private lateinit var country: TextView
     private lateinit var city: TextView
-    private lateinit var lat: TextView
-    private lateinit var lon: TextView
+    lateinit var lat: TextView
+    lateinit var lon: TextView
+
     private lateinit var currentLocationBT: Button
     private lateinit var meteriologiaBT: Button
     private lateinit var loadLocalBT: Button
+    private lateinit var searchcityBT: Button
+
     private lateinit var countryString: String
     private lateinit var cityString: String
     private lateinit var latString: String
     private lateinit var longString: String
 
     private val permissionRequestAccessLocation = 100
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,18 +56,20 @@ class MainActivity : AppCompatActivity() {
         currentLocationBT = findViewById(R.id.button)
         meteriologiaBT = findViewById(R.id.button3)
         loadLocalBT = findViewById(R.id.button4)
+        searchcityBT = findViewById(R.id.button2)
 
         currentLocationBT.setOnClickListener{
             getCurrentLocation()
         }
 
         meteriologiaBT.setOnClickListener{
-            if(lat.text.isNotEmpty() && lon.text.isNotEmpty() ) {
-                val tempoIntent = Intent(this, WeatherActivity::class.java)
-                startActivity(tempoIntent)
-            } else{
-                Toast.makeText(this, "Tem de selecionar uma localização", Toast.LENGTH_SHORT).show()
-            }
+            val tempoIntent = Intent(this, WeatherActivity::class.java)
+            startActivity(tempoIntent)
+        }
+
+        searchcityBT.setOnClickListener{
+            val tempoIntent = Intent(this, WeatherActivityCity::class.java)
+            startActivity(tempoIntent)
         }
 
         loadLocalBT.setOnClickListener{
@@ -260,14 +264,14 @@ class MainActivity : AppCompatActivity() {
         return savedString.toString()
     }
 
-    fun loadLatitude(): String {
+    private fun loadLatitude(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("latitude", null)
 
         return savedString.toString()
     }
 
-    fun loadLongitude(): String {
+    private fun loadLongitude(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("longitude", null)
 
@@ -279,14 +283,6 @@ class MainActivity : AppCompatActivity() {
         city.text = loadCity()
         lat.text = loadLatitude()
         lon.text = loadLongitude()
-    }
-
-    fun latitudeTV(): String {
-        return lat.text.toString()
-    }
-
-    fun longitudeTV(): String {
-        return lon.text.toString()
     }
 
 }

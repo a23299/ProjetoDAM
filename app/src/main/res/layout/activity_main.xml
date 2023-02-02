@@ -107,25 +107,26 @@
             android:layout_marginTop="40dp">
 
         </TextView>
+
         <TextView
+            android:id="@+id/longi"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="40dp"
-            android:textColor="@color/black"
+            android:layout_marginTop="120dp"
             android:hint="Longitude"
-            android:id="@+id/longi"
-            android:layout_marginTop="120dp">
+            android:textColor="@color/black"
+            android:textSize="40dp">
 
         </TextView>
 
         <TextView
+            android:id="@+id/lat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="40dp"
-            android:textColor="@color/black"
+            android:layout_marginTop="80dp"
             android:hint="Latitude"
-            android:id="@+id/lat"
-            android:layout_marginTop="80dp">
+            android:textColor="@color/black"
+            android:textSize="40dp">
 
         </TextView>
 

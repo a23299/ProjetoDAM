@@ -15,11 +15,10 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivityCity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWeatherBinding
-    var lat: String = "39.4647"
-    var lon: String = "-8.469"
+    var city = "Lisbon"
     val api: String = "f4e820447d3f6dc3e5581f68d547ef74"
     private var main = MainActivity()
     private lateinit var voltarBT: Button
@@ -30,7 +29,7 @@ class WeatherActivity : AppCompatActivity() {
 
         voltarBT = findViewById(R.id.voltar_BT)
 
-        getCoordinates()
+        getCity()
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -43,10 +42,8 @@ class WeatherActivity : AppCompatActivity() {
 
     }
 
-
-    private fun getCoordinates(){
-        lat = main.getCurrentLatitude(applicationContext).toString()
-        lon = main.getCurrentLongitude(applicationContext).toString()
+    private fun getCity(){
+        city = ""
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -64,7 +61,7 @@ class WeatherActivity : AppCompatActivity() {
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: String?): String? {
             val response: String? = try {
-                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&lat=$lat&lon=$lon&appid=$api").readText(
+                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&q=$city&appid=$api").readText(
                     Charsets.UTF_8)
             } catch (e: Exception) {
                 null
