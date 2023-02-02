@@ -63,8 +63,7 @@ class WeatherActivity : AppCompatActivity() {
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: String?): String? {
             val response: String? = try {
-                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&lat=$lat&lon=$lon&appid=$api").readText(
-                    Charsets.UTF_8)
+                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&lat=$lat&lon=$lon&appid=$api").readText(Charsets.UTF_8)
             } catch (e: Exception) {
                 null
             }

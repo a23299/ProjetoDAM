@@ -20,7 +20,8 @@ class WeatherActivityCity : AppCompatActivity() {
     private lateinit var binding: ActivityWeatherBinding
     var city = "Lisbon"
     val api: String = "f4e820447d3f6dc3e5581f68d547ef74"
-    private var main = MainActivity()
+    private var search = SearchActivity()
+    private lateinit var citySearch: EditText
     private lateinit var voltarBT: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +29,7 @@ class WeatherActivityCity : AppCompatActivity() {
         setContentView(R.layout.activity_weather)
 
         voltarBT = findViewById(R.id.voltar_BT)
+        citySearch = search.procurarCity
 
         getCity()
         WeatherTask().execute()
@@ -36,14 +38,14 @@ class WeatherActivityCity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.voltarBT.setOnClickListener {
-            val voltarIntent = Intent(this, MainActivity::class.java)
+            val voltarIntent = Intent(this, SearchActivity::class.java)
             startActivity(voltarIntent)
         }
 
     }
 
     private fun getCity(){
-        city = ""
+        city = search.getCity()
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -61,8 +63,7 @@ class WeatherActivityCity : AppCompatActivity() {
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: String?): String? {
             val response: String? = try {
-                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&q=$city&appid=$api").readText(
-                    Charsets.UTF_8)
+                URL("https://api.openweathermap.org/data/2.5/weather?lang=pt&units=metric&q=$city&appid=$api").readText(Charsets.UTF_8)
             } catch (e: Exception) {
                 null
             }

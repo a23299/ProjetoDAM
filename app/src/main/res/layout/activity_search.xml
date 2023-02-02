@@ -16,42 +16,49 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="297dp"
         android:layout_gravity="center_horizontal"
-        android:padding="24dp"
-        >
+        android:orientation="vertical"
+        android:padding="24dp">
 
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Procurar"
-          android:textSize="36sp"
           android:textAlignment="center"
-          android:textStyle="bold"
           android:textColor="@color/azul"
-          />
+          android:textSize="36sp"
+          android:textStyle="bold" />
 
       <EditText
+          android:id="@+id/procurar"
           android:layout_width="match_parent"
           android:layout_height="50dp"
-          android:id="@+id/procurar"
-          android:background="@drawable/custom_edit_text"
           android:layout_marginTop="8dp"
-          android:hint="    Insira nome da cidade"
+          android:background="@drawable/custom_edit_text"
           android:drawablePadding="8dp"
-          android:textColor="@color/black"
-          />
+          android:hint="    Insira nome da cidade"
+          android:textColor="@color/black" />
+
       <Button
+          android:id="@+id/procurar_button"
           android:layout_width="match_parent"
           android:layout_height="60dp"
-          android:text="Procurar"
-          android:id="@+id/procurar_button"
-          android:textSize="18sp"
           android:layout_marginTop="8dp"
           android:backgroundTint="@color/azul"
-          app:cornerRadius = "20dp"
-          />
+          android:text="Procurar"
+          android:textSize="18sp"
+          app:cornerRadius="20dp" />
+
+      <Button
+          android:id="@+id/voltarBT"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"
+          android:layout_marginTop="8dp"
+          android:backgroundTint="@color/azul"
+          android:text="Voltar"
+          android:textSize="18sp"
+          app:cornerRadius="20dp" />
     </LinearLayout>
 
   </androidx.cardview.widget.CardView>

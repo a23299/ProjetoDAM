@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var currentLocationBT: Button
     private lateinit var meteriologiaBT: Button
     private lateinit var loadLocalBT: Button
-    private lateinit var searchcityBT: Button
+    private lateinit var searchCityBT: Button
 
     private lateinit var countryString: String
     private lateinit var cityString: String
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         currentLocationBT = findViewById(R.id.button)
         meteriologiaBT = findViewById(R.id.button3)
         loadLocalBT = findViewById(R.id.button4)
-        searchcityBT = findViewById(R.id.button2)
+        searchCityBT = findViewById(R.id.button2)
 
         currentLocationBT.setOnClickListener{
             getCurrentLocation()
@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(tempoIntent)
         }
 
-        searchcityBT.setOnClickListener{
-            val tempoIntent = Intent(this, WeatherActivityCity::class.java)
+        searchCityBT.setOnClickListener{
+            val tempoIntent = Intent(this, SearchActivity::class.java)
             startActivity(tempoIntent)
         }
 

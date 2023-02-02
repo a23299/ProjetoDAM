@@ -24,7 +24,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ActivitySearch"
+            android:name=".SearchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -32,6 +32,13 @@
         </activity>
         <activity
             android:name=".WeatherActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".WeatherActivityCity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
