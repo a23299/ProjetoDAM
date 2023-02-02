@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         meteriologiaBT.setOnClickListener{
-            if(lat.text.isNotEmpty() && lat.text.isNotEmpty() ) {
+            if(lat.text.isNotEmpty() && lon.text.isNotEmpty() ) {
                 val tempoIntent = Intent(this, WeatherActivity::class.java)
                 startActivity(tempoIntent)
             } else{
@@ -280,6 +280,14 @@ class MainActivity : AppCompatActivity() {
         city.text = loadCity()
         lat.text = loadLatitude()
         lon.text = loadLongitude()
+    }
+
+    fun latitudeTV(): String {
+        return lat.text.toString()
+    }
+
+    fun longitudeTV(): String {
+        return lon.text.toString()
     }
 
 }

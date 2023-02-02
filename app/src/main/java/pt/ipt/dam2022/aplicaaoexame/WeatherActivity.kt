@@ -28,7 +28,7 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        getCoordinates(main.loadLatitude(), main.loadLongitude())
+        getCoordinates(main.latitudeTV(), main.longitudeTV())
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
