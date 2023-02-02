@@ -43,7 +43,6 @@ class WeatherActivity : AppCompatActivity() {
 
     }
 
-
     private fun getCoordinates(){
         lat = main.getCurrentLatitude(applicationContext).toString()
         lon = main.getCurrentLongitude(applicationContext).toString()
