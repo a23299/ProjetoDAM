@@ -11,4 +11,25 @@
     <string name="country">País</string>
     <string name="currentLocation">Current Location</string>
     <string name="current_location">Current Location</string>
+    <string name="procurar">Procurar</string>
+    <string name="insira_nome_da_cidade">Insira nome da cidade</string>
+    <string name="ltima_pesquisa">Última pesquisa:</string>
+    <string name="procurar_bt">Procurar</string>
+    <string name="voltar">Voltar</string>
+    <string name="localiza_o">Localização</string>
+    <string name="update">Update</string>
+    <string name="chuva">chuva</string>
+    <string name="_24">24º</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="erro">Erro</string>
+    <string name="localiza_o_atual">Localização atual</string>
+    <string name="procurar_localiza_o">Procurar Localização</string>
+    <string name="ver_temperatura">Ver Temperatura</string>
+    <string name="carregar_ultima_localiza_o">Carregar ultima localização</string>
+    <string name="login">Login</string>
+    <string name="ainda_n_o_tem_conta_login">Ainda não tem conta? Login</string>
+    <string name="show">Show</string>
+    <string name="save">Save</string>
+    <string name="name">Name</string>
 </resources>

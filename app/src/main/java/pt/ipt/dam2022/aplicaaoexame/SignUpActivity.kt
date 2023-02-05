@@ -17,6 +17,7 @@ class SignUpActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        //verificar SignUp
         binding.signupButton.setOnClickListener {
             val email = binding.signupEmail.text.toString()
             val password = binding.signupPassword.text.toString()
@@ -49,6 +50,7 @@ class SignUpActivity : AppCompatActivity() {
 
         }
 
+        //ir para LogIn
         binding.loginRedirectText.setOnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
             startActivity(loginIntent)

@@ -27,7 +27,7 @@
                 android:id="@+id/Localizacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Localização"
+                android:text="@string/localiza_o"
                 android:textColor="@color/white"
                 android:textSize="24sp">
 
@@ -37,7 +37,7 @@
                 android:id="@+id/update1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Uupdate"
+                android:text="@string/update"
                 android:textColor="@color/white"
                 android:textSize="14sp">
 
@@ -58,9 +58,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="chuva"
+                android:text="@string/chuva"
                 android:textColor="@color/white"
-                android:textSize="18sp"></TextView>
+                android:textSize="18sp">
+
+            </TextView>
 
             <ImageView
                 android:id="@+id/weather_icon"
@@ -82,9 +84,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-thin"
-                android:text="24º"
+                android:text="@string/_24"
                 android:textColor="@color/white"
-                android:textSize="90sp"></TextView>
+                android:textSize="90sp">
+
+            </TextView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +100,7 @@
                     android:id="@+id/temp_min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="min"
+                    android:text="@string/min"
                     android:textColor="#FFFFFF">
 
                 </TextView>
@@ -111,7 +115,7 @@
                     android:id="@+id/temp_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="max"
+                    android:text="@string/max"
                     android:textColor="#FFFFFF">
 
                 </TextView>
@@ -127,7 +131,7 @@
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
                     android:backgroundTint="@color/azul2"
-                    android:text="Voltar"
+                    android:text="@string/voltar"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
             </LinearLayout>
@@ -151,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Erro"
+        android:text="@string/erro"
         android:visibility="gone">
 
     </TextView>

@@ -24,7 +24,7 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Procurar"
+          android:text="@string/procurar"
           android:textAlignment="center"
           android:textColor="@color/azul"
           android:textSize="36sp"
@@ -37,12 +37,18 @@
           android:layout_marginTop="8dp"
           android:background="@drawable/custom_edit_text"
           android:drawablePadding="8dp"
-          android:hint="    Insira nome da cidade"
+          android:hint="@string/insira_nome_da_cidade"
           android:textColor="@color/black" />
 
       <TextView
-          android:id="@+id/lastSearch"
+          android:id="@+id/textView"
           android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/ltima_pesquisa" />
+
+      <TextView
+          android:id="@+id/lastSearch"
+          android:layout_width="302dp"
           android:layout_height="wrap_content" />
 
       <Button
@@ -51,7 +57,7 @@
           android:layout_height="60dp"
           android:layout_marginTop="8dp"
           android:backgroundTint="@color/azul"
-          android:text="Procurar"
+          android:text="@string/procurar_bt"
           android:textSize="18sp"
           app:cornerRadius="20dp" />
 
@@ -61,7 +67,7 @@
           android:layout_height="60dp"
           android:layout_marginTop="8dp"
           android:backgroundTint="@color/azul"
-          android:text="Voltar"
+          android:text="@string/voltar"
           android:textSize="18sp"
           app:cornerRadius="20dp" />
     </LinearLayout>

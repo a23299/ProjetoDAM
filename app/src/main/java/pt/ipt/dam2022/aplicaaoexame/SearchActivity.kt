@@ -23,7 +23,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var procurarBT: Button
     private lateinit var voltarBT: Button
     private lateinit var lastSearch: TextView
-    var city: String = ""
+    private var city: String = ""
     //val searches = ArrayList<String>()
 
     @SuppressLint("MissingInflatedId")
@@ -31,6 +31,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        //Referencia para a BD
         val myRef = FirebaseDatabase.getInstance("https://aplicacaoexame-default-rtdb.europe-west1.firebasedatabase.app").getReference("strings")
 
         lastSearch = findViewById(R.id.lastSearch)
@@ -53,6 +54,7 @@ class SearchActivity : AppCompatActivity() {
             }
         })*/
 
+        //Procurar tempo na cidade pesquisada
         procurarBT.setOnClickListener{
             if(TextUtils.isEmpty(procurarCity.text)) {
                 Toast.makeText(this, "Escreva Algo", Toast.LENGTH_SHORT).show()
@@ -64,40 +66,19 @@ class SearchActivity : AppCompatActivity() {
                 startActivity(tempoIntent)
                 myRef.setValue(getCity())
             }
-            //myRef.setValue("Hello There")
         }
 
+        //voltar para o Main Activity
         voltarBT.setOnClickListener {
             val voltarIntent = Intent(this, MainActivity::class.java)
             startActivity(voltarIntent)
         }
 
+        //ir buscar o ultimo valor colocado na barra de pesquisa
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 val value = dataSnapshot.getValue<String>()
                 lastSearch.text = value
-
-                // Clear the ArrayList
-                /*searches.clear()
-
-                // Get the children of the snapshot
-                for (snapshot in dataSnapshot.children) {
-                    // Get the string value from the snapshot
-                    val value = dataSnapshot.getValue<String>()
-
-                    // Add the string to the ArrayList
-                    if (value != null) {
-                        searches.add(value)
-                    }
-                }
-
-                // Create an ArrayAdapter to bind the ArrayList to the Spinner
-                val adapter = ArrayAdapter(this@SearchActivity, android.R.layout.simple_spinner_item, searches)
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                // Set the adapter on the Spinner
-                lastChanges.adapter = adapter*/
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -108,6 +89,7 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
+    //retornar o valor colocado na barra de pesquisa
     @JvmName("getCity1")
     fun getCity(): String {
         return city

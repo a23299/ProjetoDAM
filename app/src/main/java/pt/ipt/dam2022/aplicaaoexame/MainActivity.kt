@@ -58,26 +58,31 @@ class MainActivity : AppCompatActivity() {
         loadLocalBT = findViewById(R.id.button4)
         searchCityBT = findViewById(R.id.button2)
 
+        //ir buscar a localização atual
         currentLocationBT.setOnClickListener{
             getCurrentLocation()
         }
 
+        //ir para Weather Activity
         meteriologiaBT.setOnClickListener{
             val tempoIntent = Intent(this, WeatherActivity::class.java)
             startActivity(tempoIntent)
         }
 
+        //ir para Search Activity
         searchCityBT.setOnClickListener{
             val tempoIntent = Intent(this, SearchActivity::class.java)
             startActivity(tempoIntent)
         }
 
+        //ir buscar ultima localização procurada
         loadLocalBT.setOnClickListener{
             loadLocation()
         }
 
     }
 
+    //retornar a localização atual
     private fun getCurrentLocation(){
         if(isLocationEnabled()){
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -112,11 +117,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //verificar se GPS está ligado
     private fun isLocationEnabled(): Boolean {
         val locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
+    //perdir permissions
     private fun requestPermission(){
         ActivityCompat.requestPermissions(
             this, arrayOf(
@@ -127,6 +134,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    //resultado do pedido das permisões
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -145,6 +153,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //retornar cidade
     fun getCityName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
@@ -161,6 +170,7 @@ class MainActivity : AppCompatActivity() {
         return addresses?.firstOrNull()?.locality
     }
 
+    //retornar País
     fun getCountryName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
@@ -177,6 +187,7 @@ class MainActivity : AppCompatActivity() {
         return addresses?.firstOrNull()?.countryName
     }
 
+    //nova Localização
     private fun newLocationData(){
         val locationRequest =  LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -192,6 +203,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //colocar dados no seus sítios
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation: Location = locationResult.lastLocation!!
@@ -205,16 +217,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //retornar latitude atual
     fun getCurrentLatitude(context: Context): String? {
         val location = getLocation(context)
         return location?.latitude?.toString()
     }
 
+    //retornar logitude atual
     fun getCurrentLongitude(context: Context): String? {
         val location = getLocation(context)
         return location?.longitude?.toString()
     }
 
+    //retornar localização
     private fun getLocation(context: Context): Location? {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -231,12 +246,15 @@ class MainActivity : AppCompatActivity() {
         return null
     }
 
+    //colocar coordenadas em variaveis: String
     private fun coordinatesString(){
         countryString = country.text.toString()
         cityString = city.text.toString()
         latString = lat.text.toString()
         longString = lon.text.toString()
     }
+
+    //guardar dados
     @SuppressLint("CommitPrefEdits")
     private fun saveData(){
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
@@ -250,6 +268,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()
     }
 
+    //ir buscar País
     private fun loadCountry(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("country", null)
@@ -257,6 +276,7 @@ class MainActivity : AppCompatActivity() {
         return savedString.toString()
     }
 
+    //ir buscar cidade
     private fun loadCity(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("city", null)
@@ -264,6 +284,7 @@ class MainActivity : AppCompatActivity() {
         return savedString.toString()
     }
 
+    //ir buscar latitude
     private fun loadLatitude(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("latitude", null)
@@ -271,6 +292,7 @@ class MainActivity : AppCompatActivity() {
         return savedString.toString()
     }
 
+    //ir buscar longitude
     private fun loadLongitude(): String {
         val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("longitude", null)
@@ -278,6 +300,7 @@ class MainActivity : AppCompatActivity() {
         return savedString.toString()
     }
 
+    //colocar dados da localização nos sitios
     private fun loadLocation(){
         country.text = loadCountry()
         city.text = loadCity()

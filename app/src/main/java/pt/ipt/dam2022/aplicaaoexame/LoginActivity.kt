@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
             firebaseAuth = FirebaseAuth.getInstance()
 
+            //Verificar LogIn
             binding.loginButton.setOnClickListener {
                 val email = binding.loginEmail.text.toString()
                 val password = binding.loginPassword.text.toString()
@@ -37,6 +38,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Nao preencheu os espaços",Toast.LENGTH_SHORT).show()
                 }
             }
+
+            //Voltar para o SignUp
             binding.signupRedirect.setOnClickListener {
                 val signupIntent = Intent(this, MainActivity::class.java)
                 startActivity(signupIntent)

@@ -30,6 +30,7 @@ class WeatherActivityCity : AppCompatActivity() {
 
         voltarBT = findViewById(R.id.voltar_BT)
 
+        //ir buscar a cidade pesquisada
         citySearched = intent.getStringExtra(null).toString()
         city = citySearched
         Toast.makeText(this, citySearched, Toast.LENGTH_SHORT).show()
@@ -39,16 +40,19 @@ class WeatherActivityCity : AppCompatActivity() {
         binding = ActivityWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //voltar ao Search Activity
         binding.voltarBT.setOnClickListener {
             val voltarIntent = Intent(this, SearchActivity::class.java)
             startActivity(voltarIntent)
         }
     }
 
+    //retornar a cidade
     private fun getCity(){
         city = citySearched
     }
 
+    //ir buscar a informação do tempo à API
     @SuppressLint("StaticFieldLeak")
     inner class WeatherTask() : AsyncTask<String, Void, String>() {
 
@@ -110,9 +114,9 @@ class WeatherActivityCity : AppCompatActivity() {
                 findViewById<TextView>(R.id.erro).visibility = View.VISIBLE
             }
         }
-
     }
 
+    //colocar imagens nas condições do tempo
     fun setWeatherConditionIcon(imageView: ImageView, weatherCondition: String) {
         when (weatherCondition) {
             "Clear" -> imageView.setImageResource(R.drawable.clear)
@@ -124,7 +128,5 @@ class WeatherActivityCity : AppCompatActivity() {
             "Clouds" -> imageView.setImageResource(R.drawable.cloud)
             else -> imageView.setImageResource(R.drawable.unknown)
         }
-
     }
-
 }

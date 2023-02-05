@@ -43,11 +43,13 @@ class WeatherActivity : AppCompatActivity() {
 
     }
 
+    //retornar as coordenadas atuais
     private fun getCoordinates(){
         lat = main.getCurrentLatitude(applicationContext).toString()
         lon = main.getCurrentLongitude(applicationContext).toString()
     }
 
+    //ir buscar a informação do tempo à API
     @SuppressLint("StaticFieldLeak")
     inner class WeatherTask() : AsyncTask<String, Void, String>() {
 
@@ -109,9 +111,9 @@ class WeatherActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.erro).visibility = View.VISIBLE
             }
         }
-
     }
 
+    //colocar imagens nas condições do tempo
     fun setWeatherConditionIcon(imageView: ImageView, weatherCondition: String) {
         when (weatherCondition) {
             "Clear" -> imageView.setImageResource(R.drawable.clear)
@@ -123,7 +125,5 @@ class WeatherActivity : AppCompatActivity() {
             "Clouds" -> imageView.setImageResource(R.drawable.cloud)
             else -> imageView.setImageResource(R.drawable.unknown)
         }
-
     }
-
 }

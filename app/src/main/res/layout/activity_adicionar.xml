@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdicionarActivity">
+    tools:context=".AddActivity">
 
     <Button
         android:id="@+id/ShowButton"
         android:layout_width="192dp"
         android:layout_height="56dp"
-        android:text="Show"
+        android:text="@string/show"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="109dp"
         tools:layout_editor_absoluteY="597dp" />
@@ -19,7 +19,7 @@
         android:id="@+id/SaveButton"
         android:layout_width="192dp"
         android:layout_height="56dp"
-        android:text="Save"
+        android:text="@string/save"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="109dp"
         tools:layout_editor_absoluteY="515dp" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/name"
         tools:layout_editor_absoluteX="70dp"
         tools:layout_editor_absoluteY="60dp"
         tools:ignore="MissingConstraints" />
@@ -41,7 +41,7 @@
         android:layout_height="297dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/name"
         tools:layout_editor_absoluteX="42dp"
         tools:layout_editor_absoluteY="172dp"
         tools:ignore="MissingConstraints" />
