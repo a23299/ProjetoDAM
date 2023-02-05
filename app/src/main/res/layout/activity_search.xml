@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="297dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="24dp">
@@ -39,6 +39,11 @@
           android:drawablePadding="8dp"
           android:hint="    Insira nome da cidade"
           android:textColor="@color/black" />
+
+      <TextView
+          android:id="@+id/lastSearch"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
 
       <Button
           android:id="@+id/procurar_button"
