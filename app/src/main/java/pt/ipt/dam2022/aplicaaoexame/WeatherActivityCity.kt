@@ -21,7 +21,7 @@ class WeatherActivityCity : AppCompatActivity() {
     var city = "Lisbon"
     val api: String = "f4e820447d3f6dc3e5581f68d547ef74"
     private var search = SearchActivity()
-    private lateinit var citySearch: EditText
+    private var citySearched: String = ""
     private lateinit var voltarBT: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +29,11 @@ class WeatherActivityCity : AppCompatActivity() {
         setContentView(R.layout.activity_weather)
 
         voltarBT = findViewById(R.id.voltar_BT)
-        citySearch = search.procurarCity
 
-        getCity()
+        citySearched = intent.getStringExtra(null).toString()
+        city = citySearched
+        Toast.makeText(this, citySearched, Toast.LENGTH_SHORT).show()
+
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -41,11 +43,10 @@ class WeatherActivityCity : AppCompatActivity() {
             val voltarIntent = Intent(this, SearchActivity::class.java)
             startActivity(voltarIntent)
         }
-
     }
 
     private fun getCity(){
-        city = search.getCity()
+        city = citySearched
     }
 
     @SuppressLint("StaticFieldLeak")
