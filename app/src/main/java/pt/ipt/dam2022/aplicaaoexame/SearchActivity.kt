@@ -80,7 +80,7 @@ class SearchActivity : AppCompatActivity() {
                 val value = dataSnapshot.getValue<String>()
                 lastSearch.text = value
             }
-
+        //erro
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())
