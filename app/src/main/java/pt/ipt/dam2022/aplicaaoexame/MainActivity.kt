@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             else{
+                //pedir permissoes
                 requestPermission()
             }
         }
