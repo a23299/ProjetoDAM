@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
             //Verificar LogIn
             binding.loginButton.setOnClickListener {
+                //ir buscar valores de email e password dos EditText
                 val email = binding.loginEmail.text.toString()
                 val password = binding.loginPassword.text.toString()
 
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
                         //verificar se o utilizador existe na bd se existir é redirecionado para MainActivity
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                         if (it.isSuccessful){
+                            //ir para MainActivity
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         }else{

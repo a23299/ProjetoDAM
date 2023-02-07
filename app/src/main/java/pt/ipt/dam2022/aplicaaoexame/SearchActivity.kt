@@ -61,9 +61,12 @@ class SearchActivity : AppCompatActivity() {
             }else{
                 city = procurarCity.text.toString()
                 Toast.makeText(this, city, Toast.LENGTH_SHORT).show()
+                //ir para o WeatherActivityCity
                 val tempoIntent = Intent(this, WeatherActivityCity::class.java)
+                //levar o valor da cidade pesquisada para o WeatherActivityCity
                 tempoIntent.putExtra(null, city)
                 startActivity(tempoIntent)
+                //definir valor da ultima cidade pesquisada na BD
                 myRef.setValue(getCity())
             }
         }
@@ -80,7 +83,7 @@ class SearchActivity : AppCompatActivity() {
                 val value = dataSnapshot.getValue<String>()
                 lastSearch.text = value
             }
-        //erro
+        //se houver algum erro ao ler o valor informar o utilizador
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())

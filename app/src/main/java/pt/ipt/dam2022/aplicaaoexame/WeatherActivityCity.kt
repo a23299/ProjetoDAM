@@ -34,6 +34,7 @@ class WeatherActivityCity : AppCompatActivity() {
         city = citySearched
         Toast.makeText(this, citySearched, Toast.LENGTH_SHORT).show()
 
+        //executar o WeatherTask
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -44,11 +45,6 @@ class WeatherActivityCity : AppCompatActivity() {
             val voltarIntent = Intent(this, SearchActivity::class.java)
             startActivity(voltarIntent)
         }
-    }
-
-    //retornar a cidade
-    private fun getCity(){
-        city = citySearched
     }
 
     //ir buscar a informação do tempo à API
@@ -78,6 +74,7 @@ class WeatherActivityCity : AppCompatActivity() {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             try {
+                //ir buscar valores do tempo da API
                 val jsonObj = JSONObject(result.toString())
                 val main = jsonObj.getJSONObject("main")
                 val sys = jsonObj.getJSONObject("sys")
@@ -98,6 +95,7 @@ class WeatherActivityCity : AppCompatActivity() {
 
                 val local = jsonObj.getString("name") + ", " + sys.getString("country")
 
+                //colocar os valores nos seus TextViews
                 findViewById<TextView>(R.id.Localizacao).text = local
                 findViewById<TextView>(R.id.update1).text = updateTempo
                 findViewById<TextView>(R.id.Tempo).text = descTempo.capitalize(Locale.ROOT)
@@ -107,8 +105,10 @@ class WeatherActivityCity : AppCompatActivity() {
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.Container1).visibility = View.VISIBLE
 
+                //colocar o icon suposto na ImageView
                 setWeatherConditionIcon(findViewById(R.id.weather_icon), groupTempo)
             } catch (e: Exception) {
+                //se ocorrer algum erro avisar o utilizador
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<TextView>(R.id.erro).visibility = View.VISIBLE
             }

@@ -19,24 +19,21 @@ class SignUpActivity : AppCompatActivity() {
 
         //verificar SignUp
         binding.signupButton.setOnClickListener {
+            //ir buscar valores de email e password dos TextViews
             val email = binding.signupEmail.text.toString()
             val password = binding.signupPassword.text.toString()
             val confirmPassword = binding.signupConfirm.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty())
                 if (password == confirmPassword) {
-                    //criar utilizador novo bd se for criado com sucesso e redirecionado para o LoginActivity
+                        //criar utilizador novo na bd, se for criado com sucesso sera redirecionado para o LoginActivity
                         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                             if (it.isSuccessful) {
+                                //ir para LoginActivity
                                 val intent = Intent(this, LoginActivity::class.java)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(
-                                    this,
-                                    it.exception.toString(),
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
+                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

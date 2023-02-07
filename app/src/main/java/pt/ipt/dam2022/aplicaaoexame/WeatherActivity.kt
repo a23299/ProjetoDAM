@@ -30,7 +30,9 @@ class WeatherActivity : AppCompatActivity() {
 
         voltarBT = findViewById(R.id.voltar_BT)
 
+        //ir buscar as coordenadas atuais
         getCoordinates()
+        //executar o WeatherTask
         WeatherTask().execute()
 
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -76,6 +78,7 @@ class WeatherActivity : AppCompatActivity() {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             try {
+                //ir buscar valores do tempo da API
                 val jsonObj = JSONObject(result.toString())
                 val main = jsonObj.getJSONObject("main")
                 val sys = jsonObj.getJSONObject("sys")
@@ -96,6 +99,7 @@ class WeatherActivity : AppCompatActivity() {
 
                 val local = jsonObj.getString("name") + ", " + sys.getString("country")
 
+                //colocar os valores nos seus TextViews
                 findViewById<TextView>(R.id.Localizacao).text = local
                 findViewById<TextView>(R.id.update1).text = updateTempo
                 findViewById<TextView>(R.id.Tempo).text = descTempo.capitalize(Locale.ROOT)
@@ -105,8 +109,10 @@ class WeatherActivity : AppCompatActivity() {
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.Container1).visibility = View.VISIBLE
 
+                //colocar o icon suposto na ImageView
                 setWeatherConditionIcon(findViewById(R.id.weather_icon), groupTempo)
             } catch (e: Exception) {
+                //se ocorrer algum erro avisar o utilizador
                 findViewById<ProgressBar>(R.id.progresso).visibility = View.GONE
                 findViewById<TextView>(R.id.erro).visibility = View.VISIBLE
             }
