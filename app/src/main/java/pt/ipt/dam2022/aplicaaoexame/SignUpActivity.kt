@@ -25,7 +25,7 @@ class SignUpActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty())
                 if (password == confirmPassword) {
-
+                        //criar utilizador
                         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val intent = Intent(this, LoginActivity::class.java)
