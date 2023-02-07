@@ -241,7 +241,7 @@ class MainActivity : AppCompatActivity() {
         )
         {
             requestPermission()
-            //se as devidas permissões forem garantidas retorna ultimo localizaçao do dispositivo
+            //se as devidas permissões forem garantidas retorna ultima localizaçao do dispositivo
         } else {
             return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         }
