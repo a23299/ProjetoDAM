@@ -20,7 +20,6 @@ class WeatherActivityCity : AppCompatActivity() {
     private lateinit var binding: ActivityWeatherBinding
     var city = "Lisbon"
     val api: String = "f4e820447d3f6dc3e5581f68d547ef74"
-    private var search = SearchActivity()
     private var citySearched: String = ""
     private lateinit var voltarBT: Button
 
