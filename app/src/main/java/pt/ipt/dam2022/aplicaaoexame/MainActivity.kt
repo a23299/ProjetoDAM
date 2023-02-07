@@ -100,26 +100,21 @@ class MainActivity : AppCompatActivity() {
                     //se location for notNull
                     else{
                         Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
-                        //colocar a localizacao atual nos TextViews
                         country.text = getCountryName(location.latitude, location.longitude, applicationContext)
                         city.text = getCityName(location.latitude, location.longitude, applicationContext)
                         lat.text = getCurrentLatitude(applicationContext)
                         lon.text = getCurrentLongitude(applicationContext)
-                        //colocar a localizacao atual nas variaveis: String
                         coordinatesString()
-                        //guardar dados
                         saveData()
                     }
                 }
             }
             else{
-                //pedir permissoes
                 requestPermission()
             }
         }
         else {
             Toast.makeText(this, "Please Enable your Location Service", Toast.LENGTH_SHORT).show()
-            //levar utilizador para as definiçoes de localizacao
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
         }
@@ -133,7 +128,8 @@ class MainActivity : AppCompatActivity() {
 
     //pedir permissions
     private fun requestPermission(){
-        ActivityCompat.requestPermissions(this, arrayOf(
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.INTERNET
@@ -142,10 +138,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     //resultado do pedido das permisões
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        //retornar o resultado das permissoes
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //se as permissoes forem garantidas fazer um toast para o utilizador saber
+
         if(requestCode == permissionRequestAccessLocation){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(applicationContext, "Granted", Toast.LENGTH_SHORT).show()
@@ -156,43 +155,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //retornar cidade a partir das coordenadas de latitude e longitude
+    //retornar cidade
     fun getCityName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
-            //utilizar geocoder com as coordenadas
             geocoder.getFromLocation(latitude, longitude, 1)
         } catch (ioException: IOException) {
-            //apanha problemas com internet e I/O
+            // Catch network or other I/O problems.
             ioException.printStackTrace()
             null
         } catch (illegalArgumentException: IllegalArgumentException) {
-            //apanha valores de latitude e/ou longitude invalidos
+            // Catch invalid latitude or longitude values.
             illegalArgumentException.printStackTrace()
             null
         }
         return addresses?.firstOrNull()?.locality
     }
 
-    //retornar País a partir das coordenadas de latitude e longitude
+    //retornar País
     fun getCountryName(latitude: Double, longitude: Double, context: Context): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = try {
-            //utilizar geocoder com as coordenadas
             geocoder.getFromLocation(latitude, longitude, 1)
         } catch (ioException: IOException) {
-            //apanha problemas com internet e I/O
+            // Catch network or other I/O problems.
             ioException.printStackTrace()
             null
         } catch (illegalArgumentException: IllegalArgumentException) {
-            //apanha valores de latitude e/ou longitude invalidos
+            // Catch invalid latitude or longitude values.
             illegalArgumentException.printStackTrace()
             null
         }
         return addresses?.firstOrNull()?.countryName
     }
 
-    //nova Localização utilizando a ultima localizaçao conhecida
+    //nova Localização
     private fun newLocationData(){
         val locationRequest =  LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -208,19 +205,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //ultima localizaçao conhecida
+    //colocar dados no seus sítios
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation: Location = locationResult.lastLocation!!
             Toast.makeText(applicationContext, "your last last location: " + lastLocation.longitude.toString() + " , " + lastLocation.latitude.toString(), Toast.LENGTH_SHORT).show()
-            //colocar a localizacao atual nos TextViews
             country.text = getCountryName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             city.text = getCityName(lastLocation.latitude, lastLocation.longitude, applicationContext)
             lat.text = lastLocation.latitude.toString()
             lon.text = lastLocation.longitude.toString()
-            //colocar a localizacao atual nas variaveis: String
             coordinatesString()
-            //guardar dados
             saveData()
         }
     }
@@ -240,15 +234,15 @@ class MainActivity : AppCompatActivity() {
     //Verificar permissões
     private fun getLocation(context: Context): Location? {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        //se as devidas permissoes nao tiverem sido garantidas, pedir permissao para acesser a localizacao
+
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
             &&
-            ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        )
         {
             requestPermission()
-
+            //se as devidas permissões forem garantidas retorna ultimo localizaçao do dispositivo
         } else {
-            //se as devidas permissões forem garantidas retorna a ultima localizaçao conhecida do dispositivo
             return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         }
 
@@ -266,9 +260,7 @@ class MainActivity : AppCompatActivity() {
     //guardar dados num ficheiro local "prefs_file"
     @SuppressLint("CommitPrefEdits")
     private fun saveData(){
-        //ficheiro localizacao
-        val sharedPreferences = getSharedPreferences("localizacao", Context.MODE_PRIVATE)
-        //editar o ficheiro
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply{
             putString("country", countryString)
@@ -281,9 +273,7 @@ class MainActivity : AppCompatActivity() {
 
     //ir buscar País ao ficheiro "prefs_file"
     private fun loadCountry(): String {
-        //ficheiro localizacao
-        val sharedPreferences = getSharedPreferences("localizacao", Context.MODE_PRIVATE)
-        //String do país
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("country", null)
 
         return savedString.toString()
@@ -291,9 +281,7 @@ class MainActivity : AppCompatActivity() {
 
     //ir buscar cidade ao ficheiro "prefs_file"
     private fun loadCity(): String {
-        //ficheiro localizacao
-        val sharedPreferences = getSharedPreferences("localizacao", Context.MODE_PRIVATE)
-        //String da cidade
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("city", null)
 
         return savedString.toString()
@@ -301,9 +289,7 @@ class MainActivity : AppCompatActivity() {
 
     //ir buscar latitude ao ficheiro "prefs_file"
     private fun loadLatitude(): String {
-        //ficheiro localizacao
-        val sharedPreferences = getSharedPreferences("localizacao", Context.MODE_PRIVATE)
-        //String latitude
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("latitude", null)
 
         return savedString.toString()
@@ -311,9 +297,7 @@ class MainActivity : AppCompatActivity() {
 
     //ir buscar longitude ao ficheiro "prefs_file"
     private fun loadLongitude(): String {
-        //ficheiro localizacao
-        val sharedPreferences = getSharedPreferences("localizacao", Context.MODE_PRIVATE)
-        //String longitude
+        val sharedPreferences = getSharedPreferences("prefs_file", Context.MODE_PRIVATE)
         val savedString = sharedPreferences.getString("longitude", null)
 
         return savedString.toString()

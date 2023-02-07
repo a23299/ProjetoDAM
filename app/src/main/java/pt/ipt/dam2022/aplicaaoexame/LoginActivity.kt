@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
                 val password = binding.loginPassword.text.toString()
 
                 if (email.isNotEmpty() && password.isNotEmpty()){
-
+                        //verificar se o utilizador existe na bd se existir é redirecionado para MainActivity
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                         if (it.isSuccessful){
                             val intent = Intent(this, MainActivity::class.java)
