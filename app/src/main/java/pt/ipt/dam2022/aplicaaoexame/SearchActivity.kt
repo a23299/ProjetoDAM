@@ -39,21 +39,6 @@ class SearchActivity : AppCompatActivity() {
         procurarBT = findViewById(R.id.procurar_button)
         voltarBT = findViewById(R.id.voltarBT)
 
-        /*procurarCity.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Update the text variable with the new text
-                city = s.toString()
-            }
-        })*/
-
         //Procurar tempo na cidade pesquisada
         procurarBT.setOnClickListener{
             if(TextUtils.isEmpty(procurarCity.text)) {
@@ -77,19 +62,18 @@ class SearchActivity : AppCompatActivity() {
             startActivity(voltarIntent)
         }
 
-        //ir buscar o ultimo valor colocado na barra de pesquisa
+        //ir buscar o ultimo valor colocado na barra de pesquisa e colocalo no TextView
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue<String>()
                 lastSearch.text = value
             }
-        //se houver algum erro ao ler o valor informar o utilizador
+            //se houver algum erro ao ler o valor informar o utilizador
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
+                //falha na leitura do valor
                 Log.w(TAG, "Failed to read value.", error.toException())
             }
         })
-
     }
 
     //retornar o valor colocado na barra de pesquisa
